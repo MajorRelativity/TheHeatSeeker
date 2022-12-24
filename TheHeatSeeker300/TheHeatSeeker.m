@@ -1,5 +1,5 @@
-%% TheHeatSeeker v3.00
-% Updated on August 3 2022
+%% TheHeatSeeker v3.01
+% Updated on December 23 2022
 
 % Clear Functions
 clear
@@ -221,7 +221,7 @@ MSD.BC.TempwI = 309; %Interior Wall Temperature K
 MSD.BC.TempwO = 295; %Outdoor Wall Temperature K
 
 % Mesh Settings
-MSD.Mesh.Hmax = 6*10^-3; % Max Mesh Length
+MSD.Mesh.Hmax = 2*10^-3; % Max Mesh Length
 MSD.Mesh.Hdelta = .10; % Percent of Hmax Hmin is
 MSD.Mesh.Hmin = MSD.Mesh.Hmax*MSD.Mesh.Hdelta;
 
@@ -262,6 +262,8 @@ MSD.parpool = 2; %(1 = Full # of Cores, 2 = System Preffered # of Cores)
 MSD.propertyStyle = 'TimeMachine'; 
 
 % Shape of Wall:
+MSD.geometryShape = 'Standard';
+
 MSD.Foam.Thickness = 2.54 * 10^-2; %m
 MSD.Foam.Length = 45.6 * 10^-2; %m
 MSD.Foam.Height = MSD.Foam.Length; 
@@ -1402,7 +1404,7 @@ for I = 1:size(P,1)
                 GP.Wall.T = Tw;
                 GP.Foam.L = Lf;
                 GP.Foam.T = Tf;
-                GP.propertyStyle = MSD.propertyStyle;
+                GP.geometryShape = MSD.geometryShape;
                 modelshapew = @(varargin)modelshapew2D(GP,varargin{:});
                 geometryFromEdges(ThermalModel{numM},modelshapew); % Uses Geometry
                 disp(['[+] [406] [Model ',numMstr,'] ','2D Geometry Generated'])
@@ -2506,6 +2508,9 @@ function MSD = msPreset(MSD)
             MSD.propertyStyle = 'TimeMachine'; 
 
             % Shape of Wall:
+            
+            MSD.geometryShape = 'Standard';
+
             MSD.Foam.Thickness = 2.54 * 10^-2 + 0.0015875; % Including Aluminum Plate
             MSD.Foam.Length = 45.6 * 10^-2; %m
             MSD.Foam.Height = MSD.Foam.Length; 
@@ -2544,6 +2549,8 @@ function MSD = msPreset(MSD)
 
             % Shape of Wall:
 
+            MSD.geometryShape = 'Standard';
+
             MSD.Wall.Thickness = 5.08 * 10^-2; %m
             MSD.Wall.Length = 90 * 10^-2; %m 
             MSD.Wall.Height = MSD.Wall.Length;
@@ -2578,6 +2585,8 @@ function MSD = msPreset(MSD)
 
             % Shape of Wall:
 
+            MSD.geometryShape = 'Standard';
+
             MSD.Foam.Thickness = 2.54 * 10^-2; %m
             MSD.Foam.Length = 45.6 * 10^-2; %m
             MSD.Foam.Height = MSD.Foam.Length; 
@@ -2611,6 +2620,8 @@ function MSD = msPreset(MSD)
             MSD.propertyStyle = 'Complex'; 
 
             % Shape of Wall:
+
+            MSD.geometryShape = 'Standard';
 
             MSD.Foam.Thickness = 2.54 * 10^-2 + 0.0015875; %m
             MSD.Foam.Length = 45.6 * 10^-2; %m
@@ -2649,6 +2660,8 @@ function MSD = msPreset(MSD)
 
             % Shape of Wall:
 
+            MSD.geometryShape = 'Standard';
+
             MSD.Foam.Thickness = 2.54 * 10^-2; %m
             MSD.Foam.Length = 45.6 * 10^-2; %m
             MSD.Foam.Height = MSD.Foam.Length; 
@@ -2685,9 +2698,11 @@ function MSD = msPreset(MSD)
         case 'ComplexNoFoam'
 
             % Property Style:
-            MSD.propertyStyle = 'ComplexNoFoam'; 
+            MSD.propertyStyle = 'ComplexNoFoam';
 
             % Shape of Wall:
+
+            MSD.geometryShape = 'Rectangular';
 
             MSD.Foam.Thickness = 0;
             MSD.Foam.Length = 0; %m

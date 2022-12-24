@@ -52,8 +52,8 @@ switch arguments
 end
 
 %% Define number of boundary segments based on property style:
-switch GP.propertyStyle
-    case 'ComplexNoFoam'
+switch GP.geometryShape
+    case 'Rectangular'
         nbs = 4;
         d=[
             0 0 0 0 % start parameter value
@@ -103,9 +103,9 @@ end
 
 %% Defines Shape of Model (if both bs and s are given):
 
-switch GP.propertyStyle
+switch GP.geometryShape
 
-    case 'ComplexNoFoam'
+    case 'Rectangular'
         if ~isempty(s)
 
             % boundary segment 1
