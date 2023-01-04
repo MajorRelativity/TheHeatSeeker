@@ -1,5 +1,5 @@
-%% TheHeatSeeker v3.01
-% Updated on December 23 2022
+%% TheHeatSeeker v3.02
+% Updated on January 4 2023
 
 % Clear Functions
 clear
@@ -262,7 +262,7 @@ MSD.parpool = 2; %(1 = Full # of Cores, 2 = System Preffered # of Cores)
 MSD.propertyStyle = 'TimeMachine'; 
 
 % Shape of Wall:
-MSD.geometryShape = 'Standard';
+MSD.geometryShape = 'Standard'; % "Standard" for the shape with a foam. "Rectangular" for no foam.
 
 MSD.Foam.Thickness = 2.54 * 10^-2; %m
 MSD.Foam.Length = 45.6 * 10^-2; %m
@@ -391,7 +391,7 @@ Colstr2 = '\n      2 = Run Single Model From Geometry ';
 Colstr3 = '\n      3 = Create Contour Plot Slices';
 Colstr4 = '\n      4 = Get Temperature at Point';
 
-Colstr5 = '\n      5 = Plot Single Geometry with Thermal Properties';
+Colstr5 = '\n      5 = Generate Single Geometry with Thermal Properties';
 
 Colstr6 = '\n      6 = Run Single Model From Geometry with Mesh Overrides';
 
@@ -399,7 +399,7 @@ Colstr6 = '\n      6 = Run Single Model From Geometry with Mesh Overrides';
 Colstr2DT = '\n  51 - 100: 2D Model';
 
 Colstr51 = '\n      51 = Generate Single Geometry ';
-Colstr52 = '\n      52 = Run Single Model From Geometry ';
+Colstr52 = '\n      52 = Solve Single Model From Geometry ';
 Colstr53 = '\n      53 = Create Contour Plot';
 Colstr54 = '\n      54 = Get Temperature at Point';
 Colstr66 = '\n      66 = Get Heat Flux At Point';
