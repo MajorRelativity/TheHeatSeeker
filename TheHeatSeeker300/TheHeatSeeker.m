@@ -1,5 +1,5 @@
-%% TheHeatSeeker v3.02
-% Updated on January 4 2023
+%% TheHeatSeeker v3.03
+% Updated on January 6 2023
 
 % Clear Functions
 clear
@@ -212,13 +212,13 @@ MSD.Overrides.OldVersion = 0; % Choose if you are running an old version of matl
 
 % Model Type ("transient", "steadystate")
 MSD.modelType = 'steadystate';
-MSD.q.RM = 0; % Use reduced size mode? (1 = yes, 0 = no). Uses only the upper left quadrant
+MSD.q.RM = 1; % Use reduced size mode? (1 = yes, 0 = no). Uses only the upper left quadrant
 
 % Indoor Boundary Conditions: (BC stays constant in time):
 MSD.BC.TempwI = 309; %Interior Wall Temperature K
 
 % Outdoor Boundary Conditions :
-MSD.BC.TempwO = 295; %Outdoor Wall Temperature K
+MSD.BC.TempwO = 295; % Outdoor Wall Temperature K
 
 % Mesh Settings
 MSD.Mesh.Hmax = 2*10^-3; % Max Mesh Length
@@ -306,7 +306,7 @@ represent a real house
 'ComplexNoFoam' - Same as complex but the foam is not on the wall
 
 %}
-MSD.Preset = 'ComplexNoPlate';
+MSD.Preset = 'ComplexNoFoam';
 
 %% Save or Load Model Specifications
 
@@ -1191,7 +1191,11 @@ for I = 1:size(P,1)
                     FigName   = get(FigHandle, 'Name');
                     lineWaitbar(1,length(FigList),214,[],['Saving Figure "',FigName,'" as a PNG: '])
                     FigSavename = ['Figures/',FigName,'.png'];
-                    saveas(FigHandle, FigSavename, 'png');
+                    try
+                        saveas(FigHandle, FigSavename, 'png');
+                    catch
+                        saveas(FigHandle, ['Figures/Figure',num2str(iFig)], 'png');
+                    end
                 end
 
                 disp('[+] [614] All Figures Saved')
